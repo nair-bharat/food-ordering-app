@@ -61,3 +61,8 @@ body {
 a:link {
     text-decoration: none;
 }
+
+.search-bar {
+    margin: 40px;
+    text-align: center;
+}
