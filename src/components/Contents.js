@@ -1,10 +1,11 @@
 import RestaurantCard from "./RestaurantCard";
 import { restaurantList } from "../Constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ShimmerPage from "./ShimmerPage";
 
 const findRestaurants = (searchInput, restaurants) => {
   const filteredValues = restaurants.filter((restaurant) =>
-    restaurant.data.name.toLowerCase().includes(searchInput.toLowerCase())
+    restaurant.data.name.toUpperCase().includes(searchInput.toUpperCase())
   );
 
   return filteredValues;
@@ -12,7 +13,25 @@ const findRestaurants = (searchInput, restaurants) => {
 
 const Contents = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [restaurants, setRestaurants] = useState(restaurantList);
+  const [filteredRestaurants, setFilteredRestaurants] = useState();
+  const [allRestaurants, setAllRestaurants] = useState();
+
+  async function getRestaurantsData() {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data?.json();
+    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+  }
+
+  useEffect(() => {
+    getRestaurantsData();
+  }, []);
+
+  if (!allRestaurants) {
+    return <ShimmerPage />;
+  }
 
   return (
     <>
@@ -27,15 +46,17 @@ const Contents = () => {
         />
         <button
           onClick={() => {
-            const data = findRestaurants(searchInput, restaurantList);
-            setRestaurants(data);
+            const data = findRestaurants(searchInput, allRestaurants);
+            console.log(data);
+            setFilteredRestaurants(data);
           }}
         >
           Find here
         </button>
       </div>
+
       <div className="cards">
-        {restaurants.map((restaurant) => {
+        {filteredRestaurants.map((restaurant) => {
           return (
             <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
           );

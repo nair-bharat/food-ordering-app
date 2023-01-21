@@ -64,5 +64,8 @@ a:link {
 
 .search-bar {
     margin: 40px;
-    text-align: center;
+}
+
+input {
+    width: 50%;
 }
