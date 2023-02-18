@@ -1,30 +1,23 @@
-const Title = () => {
-  const logo = require("../assets/images/food_corner_logo.png");
-  return (
-    <a href="/">
-      <img className="logo" src={logo} alt="logo" />
-    </a>
-  );
-};
+import logo from "../assets/images/logo.png";
 
 const Header = () => {
   return (
-    <div className="header">
-      <Title />
-      <div className="nav-items">
-        <ul>
-          <a href="#home">
-            <li>Home</li>
-          </a>
-          <a href="#about">
-            <li>About</li>
-          </a>
-          <a href="#contact">
-            <li>Contact</li>
-          </a>
-          <a href="#contact">
-            <li>Cart</li>
-          </a>
+    <div className="flex justify-between shadow-lg">
+      <img className="w-28" src={logo} alt="logo" />
+      <div>
+        <ul className="flex py-8">
+          <li className="px-5">
+            <a>Home</a>
+          </li>
+          <li className="px-5">
+            <a>About</a>
+          </li>
+          <li className="px-5">
+            <a>Contact</a>
+          </li>
+          <li className="px-5">
+            <a>Cart</a>
+          </li>
         </ul>
       </div>
     </div>
