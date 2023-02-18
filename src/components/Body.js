@@ -4,6 +4,7 @@ import RestaurantCard from "./RestaurantCard";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   async function getRestaurants() {
@@ -11,6 +12,7 @@ const Body = () => {
     const json = await data.json();
 
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
 
   useEffect(() => {
@@ -18,11 +20,11 @@ const Body = () => {
   }, []);
 
   const filterRestaurants = (searchInput, restaurants) => {
-    const data = restaurants.filter((restaurant) => {
-        console.log(restaurant);
-      restaurant.data.name.toLowerCase().includes(searchInput.toLowerCase());
-    });
-    return restaurants;
+    const filterData = restaurants.filter((restaurant) =>
+      restaurant.data.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    
+    return filterData;
   };
 
   return (
@@ -38,15 +40,14 @@ const Body = () => {
           className="bg-green-500 text-white p-2 mx-5 rounded-lg text-sm"
           onClick={() => {
             const data = filterRestaurants(searchInput, allRestaurants);
-            setAllRestaurants(data);
+            setFilteredRestaurants(data);
           }}
         >
           Search
         </button>
       </div>
-      {console.log(allRestaurants)}
       <div className="flex flex-wrap mx-20">
-        {allRestaurants.map((restaurant) => {
+        {filteredRestaurants.map((restaurant) => {
           return (
             <RestaurantCard {...restaurant?.data} key={restaurant?.data?.id} />
           );
