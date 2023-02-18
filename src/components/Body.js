@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SWIGGY_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
+import ShimmerBody from "./ShimmerBody";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -23,7 +24,7 @@ const Body = () => {
     const filterData = restaurants.filter((restaurant) =>
       restaurant.data.name.toLowerCase().includes(searchInput.toLowerCase())
     );
-    
+
     return filterData;
   };
 
@@ -46,13 +47,20 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="flex flex-wrap mx-20">
-        {filteredRestaurants.map((restaurant) => {
-          return (
-            <RestaurantCard {...restaurant?.data} key={restaurant?.data?.id} />
-          );
-        })}
-      </div>
+      {allRestaurants?.length === 0 ? (
+        <ShimmerBody />
+      ) : (
+        <div className="flex flex-wrap mx-25">
+          {filteredRestaurants?.map((restaurant) => {
+            return (
+              <RestaurantCard
+                {...restaurant?.data}
+                key={restaurant?.data?.id}
+              />
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };
