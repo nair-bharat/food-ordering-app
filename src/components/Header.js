@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 
 const Header = () => {
@@ -7,16 +8,19 @@ const Header = () => {
       <div>
         <ul className="flex py-8">
           <li className="px-5">
-            <a>Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li className="px-5">
-            <a>About</a>
+          <Link to="about">About</Link>
           </li>
           <li className="px-5">
             <a>Contact</a>
           </li>
           <li className="px-5">
             <a>Cart</a>
+          </li>
+          <li className="px-5">
+            <a>Login</a>
           </li>
         </ul>
       </div>

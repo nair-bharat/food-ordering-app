@@ -1,5 +1,5 @@
 const Footer = () => {
-  return <div>This site is built and maintained by Bharat Nair</div>;
+  return <div>Hey everyone!, Thanks for trying out food corner app ♥</div>;
 };
 
 export default Footer;

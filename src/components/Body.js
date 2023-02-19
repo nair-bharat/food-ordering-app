@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SWIGGY_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import ShimmerBody from "./ShimmerBody";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -10,7 +11,7 @@ const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch(SWIGGY_API);
-    const json = await data.json();
+    const json = await data?.json();
 
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
@@ -30,9 +31,9 @@ const Body = () => {
 
   return (
     <>
-      <div>
+      <div className="flex justify-center h-[100px] items-center m-auto">
         <input
-          className="my-10 p-2 bg-gray-100"
+          className="my-10 p-2 bg-gray-100 basis-96 rounded-md text-sm"
           placeholder="Search a restaurant"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
@@ -53,10 +54,12 @@ const Body = () => {
         <div className="flex flex-wrap mx-12">
           {filteredRestaurants?.map((restaurant) => {
             return (
-              <RestaurantCard
-                {...restaurant?.data}
-                key={restaurant?.data?.id}
-              />
+              <Link to={"/restaurant/" + restaurant?.data?.id}>
+                <RestaurantCard
+                  {...restaurant?.data}
+                  key={restaurant?.data?.id}
+                />
+              </Link>
             );
           })}
         </div>
