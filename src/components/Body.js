@@ -47,6 +47,7 @@ const Body = () => {
         >
           Search
         </button>
+        {console.log(allRestaurants)}
       </div>
       {allRestaurants?.length === 0 ? (
         <ShimmerBody />
