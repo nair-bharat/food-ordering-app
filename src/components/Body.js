@@ -50,7 +50,7 @@ const Body = () => {
       {allRestaurants?.length === 0 ? (
         <ShimmerBody />
       ) : (
-        <div className="flex flex-wrap mx-25">
+        <div className="flex flex-wrap mx-12">
           {filteredRestaurants?.map((restaurant) => {
             return (
               <RestaurantCard

@@ -12,7 +12,7 @@ const RestaurantCard = ({
   veg,
 }) => {
   return (
-    <div className="w-64 p-5 hover:shadow-lg m-5">
+    <div className="w-60 p-2 hover:shadow-lg m-4">
       <img src={IMG_CDN_URL + cloudinaryImageId} alt="food-image" />
       <div className="flex justify-between">
         <div className="font-bold">{name}</div>
