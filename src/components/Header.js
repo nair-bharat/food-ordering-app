@@ -1,30 +1,27 @@
-const Title = () => {
-  const logo = require("../assets/images/food_corner_logo.png");
-  return (
-    <a href="/">
-      <img className="logo" src={logo} alt="logo" />
-    </a>
-  );
-};
+import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.png";
 
 const Header = () => {
   return (
-    <div className="header">
-      <Title />
-      <div className="nav-items">
-        <ul>
-          <a href="#home">
-            <li>Home</li>
-          </a>
-          <a href="#about">
-            <li>About</li>
-          </a>
-          <a href="#contact">
-            <li>Contact</li>
-          </a>
-          <a href="#contact">
-            <li>Cart</li>
-          </a>
+    <div className="flex justify-between shadow-lg">
+      <img className="w-28" src={logo} alt="logo" />
+      <div>
+        <ul className="flex py-8">
+          <li className="px-5">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="px-5">
+          <Link to="about">About</Link>
+          </li>
+          <li className="px-5">
+            <a>Contact</a>
+          </li>
+          <li className="px-5">
+            <a>Cart</a>
+          </li>
+          <li className="px-5">
+            <a>Login</a>
+          </li>
         </ul>
       </div>
     </div>

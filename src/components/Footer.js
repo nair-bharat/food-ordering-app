@@ -1,12 +1,5 @@
 const Footer = () => {
-  return (
-    <div className="footer">
-    <ul>
-        <a href="#gallery"><li>Gallery</li></a>
-        <a href="#quick_links"><li>Quick Links</li></a>
-    </ul>
-    </div>
-  );
+  return <div>Hey everyone!, Thanks for trying out food corner app ♥</div>;
 };
 
 export default Footer;
