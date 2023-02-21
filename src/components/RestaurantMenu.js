@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addItem } from "../utils/cartSlice";
 import { MENU_API } from "../utils/constants";
 import { IMG_CDN_URL } from "../utils/constants";
 import ShimmerMenu from "./ShimmerMenu";
@@ -7,6 +9,8 @@ import ShimmerMenu from "./ShimmerMenu";
 const RestaurantMenu = () => {
   const { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((store) => store.cart.items);
 
   async function getRestarauntInfo() {
     const data = await fetch(MENU_API + id);
@@ -14,6 +18,7 @@ const RestaurantMenu = () => {
     console.log(restaurantInfo?.data);
     setRestaurant(restaurantInfo?.data);
   }
+
   useEffect(() => {
     getRestarauntInfo();
   }, []);
@@ -21,6 +26,15 @@ const RestaurantMenu = () => {
   if (!restaurant) {
     return <ShimmerMenu />;
   }
+
+  const addCartItem = (item) => {
+    console.log("123");
+    dispatch(addItem(item));
+  };
+
+  const removeCartItem = (item) => {
+    console.log("456");
+  };
 
   return (
     <>
@@ -57,11 +71,11 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-      <div className="first-letter:">
+      <div className="">
         {Object.values(restaurant?.menu?.items)
           ?.slice(0, 20)
           ?.map((item) => (
-            <div className="p-5 m-5 border border-solid flex">
+            <div className="p-5 m-5 border border-solid flex" key={item.id}>
               <div className="p-4">
                 <div className="font-bold text-md p-1">{item?.name}</div>
                 <div className="text-sm p-1">₹{item?.price / 100}</div>
@@ -69,12 +83,27 @@ const RestaurantMenu = () => {
                   {item?.category}
                 </div>
               </div>
-              {item?.cloudinaryImageId && (
-                <img
-                  className="w-40 p-4"
-                  src={IMG_CDN_URL + item?.cloudinaryImageId}
-                ></img>
-              )}
+              <div>
+                {item?.cloudinaryImageId && (
+                  <img
+                    className="w-40 p-4"
+                    src={IMG_CDN_URL + item?.cloudinaryImageId}
+                  ></img>
+                )}
+                <button
+                  className="bg-green-100 m-2"
+                  onClick={() => addCartItem(item)}
+                >
+                  +
+                </button>
+                <div>{cartItems.length}</div>
+                <button
+                  className="bg-green-100 m-2"
+                  onClick={() => removeCartItem(item)}
+                >
+                  -
+                </button>
+              </div>
             </div>
           ))}
       </div>

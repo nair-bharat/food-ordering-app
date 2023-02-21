@@ -14,7 +14,9 @@ const Body = () => {
     const json = await data?.json();
 
     let restaurantInfo =
-      json?.data?.cards?.length == 3 ? json?.data?.cards[2] : json?.data?.cards[0];
+      json?.data?.cards?.length == 3
+        ? json?.data?.cards[2]
+        : json?.data?.cards[0];
 
     setAllRestaurants(restaurantInfo?.data?.data?.cards);
     setFilteredRestaurants(restaurantInfo?.data?.data?.cards);
@@ -52,7 +54,7 @@ const Body = () => {
         </button>
         {console.log(allRestaurants)}
       </div>
-      {allRestaurants == null ? (
+      {!allRestaurants ? (
         <ShimmerBody />
       ) : (
         <div className="flex flex-wrap mx-12">
