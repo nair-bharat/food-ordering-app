@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addItem } from "../utils/cartSlice";
+import { addItem, removeItem } from "../utils/cartSlice";
 import { MENU_API } from "../utils/constants";
 import { IMG_CDN_URL } from "../utils/constants";
 import ShimmerMenu from "./ShimmerMenu";
@@ -34,6 +34,7 @@ const RestaurantMenu = () => {
 
   const removeCartItem = (item) => {
     console.log("456");
+    dispatch(removeItem(item));
   };
 
   return (
@@ -78,7 +79,7 @@ const RestaurantMenu = () => {
             <div className="p-5 m-5 border border-solid flex" key={item.id}>
               <div className="p-4">
                 <div className="font-bold text-md p-1">{item?.name}</div>
-                <div className="text-sm p-1">₹{item?.price / 100}</div>
+                <div className="text-sm p-1">₹ {Math.round((item?.price / 100) * 100 / 100)}</div>
                 <div className="font-extralight text-sm p-1">
                   {item?.category}
                 </div>
@@ -96,6 +97,7 @@ const RestaurantMenu = () => {
                 >
                   +
                 </button>
+                {console.log(cartItems)}
                 <div>{cartItems.length}</div>
                 <button
                   className="bg-green-100 m-2"
