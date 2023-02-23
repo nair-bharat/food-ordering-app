@@ -21,7 +21,9 @@ const Header = () => {
             <a>Contact</a>
           </li>
           <li className="px-5">
-            <a>Cart - {cartItems.length}, {price}</a>
+            <Link to="cart">
+              Cart - {cartItems.length}, {price}
+            </Link>
           </li>
           <li className="px-5">
             <a>Login</a>

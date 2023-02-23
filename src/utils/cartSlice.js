@@ -9,16 +9,17 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       state.items.push(action.payload);
-      state.total += Math.round((action.payload.price / 100) * 100 / 100);
+      state.total += Math.round(((action.payload.price / 100) * 100) / 100);
     },
     removeItem: (state, action) => {
-        
-        if (state.items.length > 0 && state.total > 0) {
-            state.items.splice(action.payload, 1);
-            state.total -= Math.round((action.payload.price / 100) * 100 / 100);
-        }
-        
-    }
+      const index = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.items.splice(index, 1);
+        state.total -= Math.round(((action.payload.price / 100) * 100) / 100);
+      }
+    },
   },
 });
 

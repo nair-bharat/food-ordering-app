@@ -28,12 +28,10 @@ const RestaurantMenu = () => {
   }
 
   const addCartItem = (item) => {
-    console.log("123");
     dispatch(addItem(item));
   };
 
   const removeCartItem = (item) => {
-    console.log("456");
     dispatch(removeItem(item));
   };
 
@@ -79,7 +77,9 @@ const RestaurantMenu = () => {
             <div className="p-5 m-5 border border-solid flex" key={item.id}>
               <div className="p-4">
                 <div className="font-bold text-md p-1">{item?.name}</div>
-                <div className="text-sm p-1">₹ {Math.round((item?.price / 100) * 100 / 100)}</div>
+                <div className="text-sm p-1">
+                  ₹ {Math.round(((item?.price / 100) * 100) / 100)}
+                </div>
                 <div className="font-extralight text-sm p-1">
                   {item?.category}
                 </div>
@@ -91,20 +91,26 @@ const RestaurantMenu = () => {
                     src={IMG_CDN_URL + item?.cloudinaryImageId}
                   ></img>
                 )}
-                <button
-                  className="bg-green-100 m-2"
-                  onClick={() => addCartItem(item)}
-                >
-                  +
-                </button>
-                {console.log(cartItems)}
-                <div>{cartItems.length}</div>
-                <button
-                  className="bg-green-100 m-2"
-                  onClick={() => removeCartItem(item)}
-                >
-                  -
-                </button>
+                <div className="flex border border-solid w-16">
+                  <button
+                    className="px-1 text-green-700"
+                    onClick={() => addCartItem(item)}
+                  >
+                    +
+                  </button>
+                  <div className="px-2 text-green-700">
+                    {
+                      cartItems.filter((cartItem) => cartItem.id === item.id)
+                        .length
+                    }
+                  </div>
+                  <button
+                    className="px-2 text-green-700"
+                    onClick={() => removeCartItem(item)}
+                  >
+                    -
+                  </button>
+                </div>
               </div>
             </div>
           ))}
