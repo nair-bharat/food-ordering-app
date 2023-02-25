@@ -5,6 +5,7 @@ import { addItem, removeItem } from "../utils/cartSlice";
 import { MENU_API } from "../utils/constants";
 import { IMG_CDN_URL } from "../utils/constants";
 import ShimmerMenu from "./ShimmerMenu";
+import { convertPrice } from "../utils/convertPrice";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
@@ -77,9 +78,7 @@ const RestaurantMenu = () => {
             <div className="p-5 m-5 border border-solid flex" key={item.id}>
               <div className="p-4">
                 <div className="font-bold text-md p-1">{item?.name}</div>
-                <div className="text-sm p-1">
-                  ₹ {Math.round(((item?.price / 100) * 100) / 100)}
-                </div>
+                <div className="text-sm p-1">₹ {convertPrice(item?.price)}</div>
                 <div className="font-extralight text-sm p-1">
                   {item?.category}
                 </div>
@@ -93,11 +92,12 @@ const RestaurantMenu = () => {
                 )}
                 <div className="flex border border-solid w-16">
                   <button
-                    className="px-1 text-green-700"
-                    onClick={() => addCartItem(item)}
+                    className="px-2 text-green-700"
+                    onClick={() => removeCartItem(item)}
                   >
-                    +
+                    -
                   </button>
+
                   <div className="px-2 text-green-700">
                     {
                       cartItems.filter((cartItem) => cartItem.id === item.id)
@@ -105,10 +105,10 @@ const RestaurantMenu = () => {
                     }
                   </div>
                   <button
-                    className="px-2 text-green-700"
-                    onClick={() => removeCartItem(item)}
+                    className="px-1 text-green-700"
+                    onClick={() => addCartItem(item)}
                   >
-                    -
+                    +
                   </button>
                 </div>
               </div>

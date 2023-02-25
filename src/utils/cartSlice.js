@@ -20,8 +20,12 @@ const cartSlice = createSlice({
         state.total -= Math.round(((action.payload.price / 100) * 100) / 100);
       }
     },
+    clearCart: (state) => {
+      state.items = [];
+      state.total = 0;
+    },
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

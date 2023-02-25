@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
+import cart_icon from "../assets/images/cart-icon.png";
 import store from "../utils/store";
 
 const Header = () => {
@@ -8,7 +9,9 @@ const Header = () => {
   const price = useSelector((store) => store.cart.total);
   return (
     <div className="flex justify-between shadow-lg">
-      <img className="w-28" src={logo} alt="logo" />
+      <Link to="/">
+        <img className="w-28" src={logo} alt="logo" />
+      </Link>
       <div>
         <ul className="flex py-8">
           <li className="px-5">
@@ -22,7 +25,8 @@ const Header = () => {
           </li>
           <li className="px-5">
             <Link to="cart">
-              Cart - {cartItems.length}, {price}
+              <img className="w-4 bg-white"src={cart_icon} alt="cart-icon" /> - {cartItems.length},{" "}
+              {price}
             </Link>
           </li>
           <li className="px-5">
