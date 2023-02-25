@@ -1,11 +1,22 @@
-import { useSelector } from "react-redux";
-import { IMG_CDN_URL } from "../utils/constants";
-import store from "../utils/store";
-import { addCartItem, removeCartItem } from "../utils/cartActions";
+import { useDispatch, useSelector } from "react-redux";
 import { convertPrice } from "../utils/convertPrice";
+import { addItem, removeItem } from "../utils/cartSlice";
 
-const MenuItem = ({ id, name, price }) => {
+const MenuItem = ({ item }) => {
+  const { id, name, price } = item;
+  console.log(item);
   const cartItems = useSelector((store) => store.cart.items);
+
+  const dispatch = useDispatch();
+
+  const addCartItem = (item) => {
+    dispatch(addItem(item));
+  };
+
+  const removeCartItem = (item) => {
+    dispatch(removeItem(item));
+  };
+
   return (
     <div className="flex">
       <h2>{name}</h2>

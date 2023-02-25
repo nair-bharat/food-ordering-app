@@ -3,6 +3,7 @@ import { SWIGGY_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import ShimmerBody from "./ShimmerBody";
 import { Link } from "react-router-dom";
+import useOnline from "../hooks/useOnline";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState(null);
@@ -34,6 +35,13 @@ const Body = () => {
     return filterData;
   };
 
+  /*
+  const isOnline = useOnline();
+
+  if (!isOnline) {
+    return <h1>Hey looks like you are offline, please check the internet connection!</h1>;
+  }*/
+  
   return (
     <>
       <div className="flex justify-center h-[100px] items-center m-auto">

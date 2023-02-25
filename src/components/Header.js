@@ -6,7 +6,6 @@ import store from "../utils/store";
 
 const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
-  const price = useSelector((store) => store.cart.total);
   return (
     <div className="flex justify-between shadow-lg">
       <Link to="/">
@@ -14,19 +13,22 @@ const Header = () => {
       </Link>
       <div>
         <ul className="flex py-8">
-          <li className="px-5">
+          <li className="px-5 font-bold">
             <Link to="/">Home</Link>
           </li>
-          <li className="px-5">
+          <li className="px-5 font-bold">
             <Link to="about">About</Link>
           </li>
           <li className="px-5">
-            <a>Contact</a>
-          </li>
-          <li className="px-5">
             <Link to="cart">
-              <img className="w-4 bg-white"src={cart_icon} alt="cart-icon" /> - {cartItems.length},{" "}
-              {price}
+              <div className="flex">
+                <img
+                  className="w-6 bg-white"
+                  src={cart_icon}
+                  alt="cart-icon"
+                />
+                <div className="text-red-500 font-bold px-1">{cartItems.length}</div>
+              </div>
             </Link>
           </li>
           <li className="px-5">

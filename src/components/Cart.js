@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../utils/cartSlice";
 import MenuItem from "./MenuItem";
+import restaurant_img from "../assets/images/restaurant.png";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -10,10 +12,28 @@ const Cart = () => {
   console.log(cartItems);
 
   const handleClearCart = () => {
-    console.log("clearcart")
+    console.log("clearcart");
     dispatch(clearCart());
   };
-  return (
+
+  function removeDuplicates(cartItems) {
+    return cartItems.filter((item, index) => cartItems.indexOf(item) === index);
+  }
+
+  const uniqueCartItems = removeDuplicates(cartItems);
+
+  console.log(cartItems);
+  return cartItems.length == 0 ? (
+    <div className="flex flex-col justify-center items-center mx-2 my-4 border-2 border-solid text-md p-2">
+      <img src={restaurant_img} alt="cooking" className="w-64" />
+      <h3 className="text-sm my-4">Nothing in the cart!</h3>
+      <Link to="/">
+        <button className="p-2 bg-green-600 text-white text-xs my-2 rounded-sm">
+          SEARCH RESTAURANTS
+        </button>
+      </Link>
+    </div>
+  ) : (
     <div className="">
       <div className="flex justify-between">
         <div>Cart Items</div>
@@ -25,8 +45,8 @@ const Cart = () => {
         </button>
       </div>
       <div>
-        {cartItems.map((item, index) => (
-          <MenuItem key={`${index}+_+${item.id}`} {...item} />
+        {uniqueCartItems.map((item, index) => (
+          <MenuItem key={`${index}+_+${item.id}`} item={item} />
         ))}
       </div>
       <div className="flex font-bold">
