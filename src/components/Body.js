@@ -3,6 +3,7 @@ import { SWIGGY_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import ShimmerBody from "./ShimmerBody";
 import { Link } from "react-router-dom";
+import useOnline from "../hooks/useOnline";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState(null);
@@ -14,7 +15,9 @@ const Body = () => {
     const json = await data?.json();
 
     let restaurantInfo =
-      json?.data?.cards?.length == 3 ? json?.data?.cards[2] : json?.data?.cards[0];
+      json?.data?.cards?.length == 3
+        ? json?.data?.cards[2]
+        : json?.data?.cards[0];
 
     setAllRestaurants(restaurantInfo?.data?.data?.cards);
     setFilteredRestaurants(restaurantInfo?.data?.data?.cards);
@@ -32,6 +35,13 @@ const Body = () => {
     return filterData;
   };
 
+  /*
+  const isOnline = useOnline();
+
+  if (!isOnline) {
+    return <h1>Hey looks like you are offline, please check the internet connection!</h1>;
+  }*/
+  
   return (
     <>
       <div className="flex justify-center h-[100px] items-center m-auto">
@@ -52,7 +62,7 @@ const Body = () => {
         </button>
         {console.log(allRestaurants)}
       </div>
-      {allRestaurants == null ? (
+      {!allRestaurants ? (
         <ShimmerBody />
       ) : (
         <div className="flex flex-wrap mx-12">

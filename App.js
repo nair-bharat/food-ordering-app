@@ -5,15 +5,18 @@ import Footer from "./src/components/Footer";
 import About from "./src/components/About";
 import RestaurantMenu from "./src/components/RestaurantMenu";
 import ErrorPage from "./src/components/ErrorPage";
+import Cart from "./src/components/Cart";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./src/utils/store";
 
 const AppLayout = () => {
   return (
-    <div>
+    <Provider store={store}>
       <Header />
       <Outlet />
       <Footer />
-    </div>
+    </Provider>
   );
 };
 
@@ -34,8 +37,12 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:id",
         errorElement: <ErrorPage />,
-        element: <RestaurantMenu />
-      }
+        element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
     ],
   },
 ]);
