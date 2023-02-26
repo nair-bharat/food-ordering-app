@@ -9,7 +9,6 @@ const Cart = () => {
   const total = useSelector((store) => store.cart.total);
 
   const dispatch = useDispatch();
-  console.log(cartItems);
 
   const handleClearCart = () => {
     console.log("clearcart");
@@ -22,11 +21,10 @@ const Cart = () => {
 
   const uniqueCartItems = removeDuplicates(cartItems);
 
-  console.log(cartItems);
   return cartItems.length == 0 ? (
     <div className="flex flex-col justify-center items-center mx-2 my-4 border-2 border-solid text-md p-2">
       <img src={restaurant_img} alt="cooking" className="w-64" />
-      <h3 className="text-sm my-4">Nothing in the cart!</h3>
+      <h3 className="text-sm my-4">No food in the cooking pan!</h3>
       <Link to="/">
         <button className="p-2 bg-green-600 text-white text-xs my-2 rounded-sm">
           SEARCH RESTAURANTS
@@ -34,11 +32,11 @@ const Cart = () => {
       </Link>
     </div>
   ) : (
-    <div className="">
-      <div className="flex justify-between">
-        <div>Cart Items</div>
+    <div className="m-5 w-auto p-6">
+      <div className="flex justify-between items-center">
+        <h1 className="font-bold text-lg text-green-600">Food Items</h1>
         <button
-          className="bg-green-900 text-white rounded-md text-xs w-20 h-6"
+          className="bg-green-600 text-white rounded-md text-xs w-20 h-6"
           onClick={() => handleClearCart()}
         >
           Clear Cart
@@ -49,11 +47,12 @@ const Cart = () => {
           <MenuItem key={`${index}+_+${item.id}`} item={item} />
         ))}
       </div>
+      <div className="border border-black my-4"></div>
       <div className="flex font-bold">
-        <h3>To Pay</h3>
-        <h3>₹ {total}</h3>
+        <h3 className="pr-1">Total Amount:</h3>
+        <h3 className="pl-1">₹{total}</h3>
       </div>
-      <button className="bg-green-600 text-white text-sm p-1">
+      <button className="bg-green-600 text-white text-sm p-1 mt-4">
         PROCEED TO PAY
       </button>
     </div>

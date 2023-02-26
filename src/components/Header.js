@@ -12,7 +12,7 @@ const Header = () => {
         <img className="w-28" src={logo} alt="logo" />
       </Link>
       <div>
-        <ul className="flex py-8">
+        <ul className="md:flex md:flex-row py-8 flex flex-col">
           <li className="px-5 font-bold">
             <Link to="/">Home</Link>
           </li>

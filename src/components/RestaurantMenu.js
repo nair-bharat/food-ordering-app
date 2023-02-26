@@ -16,7 +16,6 @@ const RestaurantMenu = () => {
   async function getRestarauntInfo() {
     const data = await fetch(MENU_API + id);
     const restaurantInfo = await data?.json();
-    console.log(restaurantInfo?.data);
     setRestaurant(restaurantInfo?.data);
   }
 
@@ -38,18 +37,18 @@ const RestaurantMenu = () => {
 
   return (
     <>
-      <div className="flex justify-center bg-green-800 text-gray-200">
+      <div className="flex md:justify-center bg-green-800 text-gray-200">
         <img
-          className="w-64 h-48 p-5"
+          className="w-32 h-24 md:w-64 md:h-48 md:p-5 p-2"
           src={IMG_CDN_URL + restaurant?.cloudinaryImageId}
         ></img>
-        <div className="p-5">
-          <h2 className="font-bold text-2xl px-5">{restaurant?.name}</h2>
-          <p className="font-extralight text-md px-5">
+        <div className="md:p-5 p-2">
+          <h2 className="font-bold md:text-2xl md:px-5 text-lg">{restaurant?.name}</h2>
+          <p className="font-extralight md:text-md md:px-5 text-sm">
             {restaurant?.cuisines?.join(", ")}
           </p>
-          <div className="flex font-bold text-sm">
-            <div className="flex p-5">
+          <div className="flex md:font-bold md:text-sm text-xs">
+            <div className="flex md:p-5 pt-1">
               <svg
                 stroke="currentColor"
                 fill="currentColor"
@@ -63,49 +62,49 @@ const RestaurantMenu = () => {
               </svg>
               <span>{restaurant?.avgRatingString}</span>
             </div>
-            <div className="p-5">|</div>
-            <div className="p-5">{restaurant?.sla?.deliveryTime} MINS</div>
-            <div className="p-5">|</div>
-            <div className="p-5">{restaurant?.costForTwoMsg}</div>
+            <div className="md:p-5 p-1">|</div>
+            <div className="md:p-5 p-1">{restaurant?.sla?.deliveryTime} MINS</div>
+            <div className="md:p-5 p-1">|</div>
+            <div className="md:p-5 p-1">{restaurant?.costForTwoMsg}</div>
           </div>
         </div>
       </div>
 
-      <div className="">
+      <div className="flex flex-col justify-center items-start">
         {Object.values(restaurant?.menu?.items)
           ?.slice(0, 20)
           ?.map((item) => (
-            <div className="p-5 m-5 border border-solid flex" key={item.id}>
+            <div className="md:p-5 p-2 md:m-5 m-2 mt-5 border border-solid flex md:w-[650px] w-[350px] justify-between" key={item.id}>
               <div className="p-4">
-                <div className="font-bold text-md p-1">{item?.name}</div>
-                <div className="text-sm p-1">₹ {convertPrice(item?.price)}</div>
-                <div className="font-extralight text-sm p-1">
+                <div className="font-bold md:text-md text-sm p-1 ">{item?.name}</div>
+                <div className="md:text-sm text-xs p-1">₹ {convertPrice(item?.price)}</div>
+                <div className="font-extralight md:text-sm text-xs p-1">
                   {item?.category}
                 </div>
               </div>
-              <div>
+              <div className="flex flex-col justify-center items-center">
                 {item?.cloudinaryImageId && (
                   <img
-                    className="w-40 p-4"
+                    className="md:w-40 w-24"
                     src={IMG_CDN_URL + item?.cloudinaryImageId}
                   ></img>
                 )}
-                <div className="flex border border-solid w-16">
+                <div className="flex border border-solid w-28 my-4">
                   <button
-                    className="px-2 text-green-700"
+                    className="px-2 text-green-700 w-8"
                     onClick={() => removeCartItem(item)}
                   >
                     -
                   </button>
 
-                  <div className="px-2 text-green-700">
+                  <div className="px-4 text-green-700 w-12">
                     {
                       cartItems.filter((cartItem) => cartItem.id === item.id)
                         .length
                     }
                   </div>
                   <button
-                    className="px-1 text-green-700"
+                    className="px-1 text-green-700 w-8"
                     onClick={() => addCartItem(item)}
                   >
                     +
