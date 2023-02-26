@@ -46,13 +46,13 @@ const Body = () => {
     <>
       <div className="flex justify-center h-[100px] items-center m-auto">
         <input
-          className="lg:my-10 m-2 p-2 lg:bg-gray-100 lg:basis-96 rounded-md text-sm basis-56"
+          className="md:my-10 m-2 p-2 md:bg-gray-100 md:basis-96 rounded-md text-sm basis-56"
           placeholder="Search a restaurant"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         ></input>
         <button
-          className="bg-green-500 text-white p-2 lg:mx-5 mx-3 rounded-lg text-sm"
+          className="bg-green-500 text-white p-2 md:mx-5 mx-3 rounded-md text-sm"
           onClick={() => {
             const data = filterRestaurants(searchInput, allRestaurants);
             setFilteredRestaurants(data);
@@ -64,7 +64,7 @@ const Body = () => {
       {!allRestaurants ? (
         <ShimmerBody />
       ) : (
-        <div className="flex flex-wrap lg:mx-12">
+        <div className="flex flex-wrap md:mx-12">
           {filteredRestaurants?.map((restaurant) => {
             return (
               <Link
