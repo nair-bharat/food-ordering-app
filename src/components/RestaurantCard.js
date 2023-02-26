@@ -12,7 +12,7 @@ const RestaurantCard = ({
   veg,
 }) => {
   return (
-    <div className="w-60 p-2 hover:shadow-lg m-4 rounded-sm">
+    <div className="w-36 p-2 m-4 lg:w-60 lg:p-2 hover:shadow-lg lg:m-4 rounded-sm">
       <img
         className="rounded-sm"
         src={IMG_CDN_URL + cloudinaryImageId}
@@ -27,9 +27,9 @@ const RestaurantCard = ({
         )}
       </div>
 
-      <div className="text-sm">{cuisines?.join(", ")}</div>
-      <div className="flex text-xs font-medium py-3">
-        <div className="bg-green-500 text-white flex">
+      <div className="text-xs lg:text-sm">{cuisines?.join(", ")}</div>
+      <div className="lg:flex text-xs font-medium lg:py-3 flex flex-col ">
+        <div className="bg-green-500 text-white lg:flex flex">
           <span className="py-1 pl-1">
             <svg
               aria-hidden="true"

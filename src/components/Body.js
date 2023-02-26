@@ -41,18 +41,18 @@ const Body = () => {
   if (!isOnline) {
     return <h1>Hey looks like you are offline, please check the internet connection!</h1>;
   }*/
-  
+
   return (
     <>
       <div className="flex justify-center h-[100px] items-center m-auto">
         <input
-          className="my-10 p-2 bg-gray-100 basis-96 rounded-md text-sm"
+          className="lg:my-10 m-2 p-2 lg:bg-gray-100 lg:basis-96 rounded-md text-sm basis-56"
           placeholder="Search a restaurant"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         ></input>
         <button
-          className="bg-green-500 text-white p-2 mx-5 rounded-lg text-sm"
+          className="bg-green-500 text-white p-2 lg:mx-5 mx-3 rounded-lg text-sm"
           onClick={() => {
             const data = filterRestaurants(searchInput, allRestaurants);
             setFilteredRestaurants(data);
@@ -60,12 +60,11 @@ const Body = () => {
         >
           Search
         </button>
-        {console.log(allRestaurants)}
       </div>
       {!allRestaurants ? (
         <ShimmerBody />
       ) : (
-        <div className="flex flex-wrap mx-12">
+        <div className="flex flex-wrap lg:mx-12">
           {filteredRestaurants?.map((restaurant) => {
             return (
               <Link

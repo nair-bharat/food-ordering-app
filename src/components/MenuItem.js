@@ -4,7 +4,6 @@ import { addItem, removeItem } from "../utils/cartSlice";
 
 const MenuItem = ({ item }) => {
   const { id, name, price } = item;
-  console.log(item);
   const cartItems = useSelector((store) => store.cart.items);
 
   const dispatch = useDispatch();
@@ -18,27 +17,27 @@ const MenuItem = ({ item }) => {
   };
 
   return (
-    <div className="flex">
-      <h2>{name}</h2>
+    <div className="flex text-sm my-3">
+      <h2 className="mr-2">{name}</h2>
       <div className="flex border border-solid w-16">
         <button
-          className="px-2 text-green-700"
+          className="px-1 text-green-700 w-4"
           onClick={() => removeCartItem(item)}
         >
           -
         </button>
-        <div className="px-2 text-green-700">
+        <div className="px-2 text-green-700 w-7">
           {cartItems.filter((cartItem) => cartItem.id === id).length}
         </div>
 
         <button
-          className="px-1 text-green-700"
+          className="px-1 text-green-700 w-4"
           onClick={() => addCartItem(item)}
         >
           +
         </button>
       </div>
-      <h2>{convertPrice(price)}</h2>
+      <h2 className="ml-1">₹{convertPrice(price)}</h2>
     </div>
   );
 };
