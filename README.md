@@ -4,8 +4,8 @@
 * Users can go to a restaurant of their choice
 * Add items to the cart, remove items to the cart and clear the cart
 
-### App Link: https://food-cornerr.netlify.app/
-### Github Link: https://github.com/nair-bharat/Food-Corner-App
+* App Link: https://food-cornerr.netlify.app/
+* Github Link: https://github.com/nair-bharat/Food-Corner-App
 
 ### Tech & Librares Used:
 * React.js
@@ -19,4 +19,5 @@
 
 ### In Progress:
 * Authentication
-* Some minor UI fixes
+* Minor UI fixes
+* Payment Gateway
