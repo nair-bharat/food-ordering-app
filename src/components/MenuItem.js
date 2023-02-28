@@ -26,7 +26,7 @@ const MenuItem = ({ item }) => {
         >
           -
         </button>
-        <div className="px-2 text-green-700 w-7">
+        <div className="px-2 text-green-700 w-7 md:pt-0 pt-1.5">
           {cartItems.filter((cartItem) => cartItem.id === id).length}
         </div>
 

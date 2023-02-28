@@ -13,7 +13,7 @@ const RestaurantCard = ({
   veg,
 }) => {
   return (
-    <div className="w-36 p-2 m-4 md:w-60 md:p-2 hover:shadow-md md:m-4 rounded-sm">
+    <div className="w-60 p-2 md:w-64 md:p-4 md:m-5 hover:shadow-lg rounded-md bg-yellow-50 mb-4">
       <img
         className="rounded-sm"
         src={IMG_CDN_URL + cloudinaryImageId}
@@ -29,7 +29,7 @@ const RestaurantCard = ({
       </div>
 
       <div className="text-xs md:text-sm">{cuisines?.join(", ")}</div>
-      <div className="md:flex text-xs font-medium md:py-3">
+      <div className="flex justify-between text-xs font-medium md:py-3 pt-1.5 w-56">
         {parseFloat(avgRating) >= 4 ? (
           <div className="text-white md:flex flex bg-green-500">
             <span className="pt-1.5 pl-1">
