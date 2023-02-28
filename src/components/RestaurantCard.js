@@ -29,7 +29,7 @@ const RestaurantCard = ({
       </div>
 
       <div className="text-xs md:text-sm">{cuisines?.join(", ")}</div>
-      <div className="md:flex text-xs font-medium md:py-3">
+      <div className="flex justify-between text-xs font-medium md:py-3 pt-1.5 w-56">
         {parseFloat(avgRating) >= 4 ? (
           <div className="text-white md:flex flex bg-green-500">
             <span className="pt-1.5 pl-1">

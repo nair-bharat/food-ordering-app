@@ -1,6 +1,6 @@
 const ShimmerBody = () => {
   return (
-    <div className="flex flex-wrap mx-12">
+    <div className="flex md:flex-row flex-col flex-wrap md:mx-12 items-center justify-center">
       {Array(15)
         .fill("")
         .map((e, i) => (

@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div className="flex justify-between shadow-lg bg-yellow-50">
       <Link to="/">
-        <img className="w-32" src={logo} alt="logo" />
+        <img className="w-28 md:w-32" src={logo} alt="logo" />
       </Link>
       <div>
         <ul className="flex flex-row py-10">
