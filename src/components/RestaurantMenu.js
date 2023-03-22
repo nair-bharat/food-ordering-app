@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addItem, removeItem } from "../utils/cartSlice";
-import { MENU_API } from "../utils/constants";
+import {
+  MENU_API,
+  NEW_MENU_API,
+  RESTAURANT_TYPE_KEY,
+  MENU_ITEM_TYPE_KEY,
+} from "../utils/constants";
 import { IMG_CDN_URL } from "../utils/constants";
 import ShimmerMenu from "./ShimmerMenu";
 import { convertPrice } from "../utils/convertPrice";
@@ -11,13 +16,39 @@ import star_rating from "../assets/images/star-rating.png";
 const RestaurantMenu = () => {
   const { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
+  const [menuItemsData, setMenuItemsData] = useState(null);
   const dispatch = useDispatch();
   const cartItems = useSelector((store) => store.cart.items);
 
   async function getRestarauntInfo() {
-    const data = await fetch(MENU_API + id);
+    const data = await fetch(NEW_MENU_API + id);
     const restaurantInfo = await data?.json();
-    setRestaurant(restaurantInfo?.data);
+    //
+    console.log(restaurantInfo?.data?.cards[0]?.card?.card?.info);
+    //console.log(restaurantInfo?.data?.cards?.map(x => x.card)?.find(x => x && x.card['@type'] === RESTAURANT_TYPE_KEY)?.card?.info)
+    console.log(
+      restaurantInfo?.data?.cards
+        ?.map((x) => x.card)
+        ?.find((x) => x.card["@type"] === RESTAURANT_TYPE_KEY)?.card?.info
+    );
+    setRestaurant(
+      restaurantInfo?.data?.cards
+        ?.map((x) => x.card)
+        ?.find((x) => x.card["@type"] === RESTAURANT_TYPE_KEY)?.card?.info
+    );
+
+    //const menuItemsData = restaurantInfo?.data?.cards[2].groupedCard.cardGroupMap;
+    //const menuItemsData = restaurantInfo?.data?.cards.find(x=> x.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards?.map(x => x.card?.card)?.filter(x=> x['@type'] == MENU_ITEM_TYPE_KEY)?.map(x=> x.itemCards).flat().map(x=> x.card?.info)
+    setMenuItemsData(
+      restaurantInfo?.data?.cards
+        .find((x) => x.groupedCard)
+        ?.groupedCard?.cardGroupMap?.REGULAR?.cards?.map((x) => x.card?.card)
+        .filter((x) => x["@type"] == MENU_ITEM_TYPE_KEY)
+        .map((x) => x.itemCards)
+        .flat()
+        .map((x) => x.card?.info)
+    );
+    console.log(menuItemsData);
   }
 
   useEffect(() => {
@@ -62,13 +93,12 @@ const RestaurantMenu = () => {
               {restaurant?.sla?.deliveryTime} MINS
             </div>
             <div className="md:p-5 p-1">|</div>
-            <div className="md:p-5 p-1">{restaurant?.costForTwoMsg}</div>
+            <div className="md:p-5 p-1">{restaurant?.costForTwoMessage}</div>
           </div>
         </div>
       </div>
-
       <div className="flex flex-col justify-center items-center">
-        {Object.values(restaurant?.menu?.items)
+        {Object.values(menuItemsData)
           ?.slice(0, 20)
           ?.map((item) => (
             <div
