@@ -2,6 +2,7 @@ import ReactDOM from "react-dom/client";
 import Header from "./src/components/Header";
 import Body from "./src/components/Body";
 import About from "./src/components/About";
+import Test from "./src/components/Test";
 import RestaurantMenu from "./src/components/RestaurantMenu";
 import ErrorPage from "./src/components/ErrorPage";
 import Cart from "./src/components/Cart";
