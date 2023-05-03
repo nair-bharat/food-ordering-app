@@ -24,13 +24,15 @@ const RestaurantMenu = () => {
     const data = await fetch(NEW_MENU_API + id);
     const restaurantInfo = await data?.json();
     //
-    console.log(restaurantInfo?.data?.cards[0]?.card?.card?.info);
+    //console.log(restaurantInfo?.data?.cards[0]?.card?.card?.info);
     //console.log(restaurantInfo?.data?.cards?.map(x => x.card)?.find(x => x && x.card['@type'] === RESTAURANT_TYPE_KEY)?.card?.info)
+    /*
     console.log(
       restaurantInfo?.data?.cards
         ?.map((x) => x.card)
         ?.find((x) => x.card["@type"] === RESTAURANT_TYPE_KEY)?.card?.info
     );
+    */
     setRestaurant(
       restaurantInfo?.data?.cards
         ?.map((x) => x.card)
@@ -48,7 +50,7 @@ const RestaurantMenu = () => {
         .flat()
         .map((x) => x.card?.info)
     );
-    console.log(menuItemsData);
+    //console.log(menuItemsData);
   }
 
   useEffect(() => {
@@ -66,6 +68,27 @@ const RestaurantMenu = () => {
   const removeCartItem = (item) => {
     dispatch(removeItem(item));
   };
+
+  let newMenuItemsData = [];
+  const removeDuplicatesMenuItemsData = () => {
+    let uniqueObject = {};
+
+    for (let i in menuItemsData) {
+              
+      // Extract the title
+      objTitle = menuItemsData[i]['id'];
+    
+      // Use the title as the index
+      uniqueObject[objTitle] = menuItemsData[i];
+
+    }
+
+      for (i in uniqueObject) {
+        newMenuItemsData.push(uniqueObject[i]);
+    }
+
+    //console.log(newMenuItemsData);
+  }
 
   return (
     <>
@@ -98,7 +121,12 @@ const RestaurantMenu = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center items-center">
-        {Object.values(menuItemsData)
+      {
+        /*console.log(menuItemsData)*/}
+      {
+        menuItemsData.length > 0 ? removeDuplicatesMenuItemsData() : console.log('don\'t do anything')
+      }
+        {Object.values(newMenuItemsData)
           ?.slice(0, 20)
           ?.map((item) => (
             <div
