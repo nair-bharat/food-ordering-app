@@ -83,7 +83,7 @@ const RestaurantMenu = () => {
 
     }
 
-      for (i in uniqueObject) {
+      for (let i in uniqueObject) {
         newMenuItemsData.push(uniqueObject[i]);
     }
 
