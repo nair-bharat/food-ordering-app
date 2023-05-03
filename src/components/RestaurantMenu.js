@@ -76,7 +76,7 @@ const RestaurantMenu = () => {
     for (let i in menuItemsData) {
               
       // Extract the title
-      objTitle = menuItemsData[i]['id'];
+      let objTitle = menuItemsData[i]['id'];
     
       // Use the title as the index
       uniqueObject[objTitle] = menuItemsData[i];
