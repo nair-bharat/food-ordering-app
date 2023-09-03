@@ -6,30 +6,32 @@ import { Link } from "react-router-dom";
 import useOnline from "../hooks/useOnline";
 
 const Body = () => {
-  const [allRestaurants, setAllRestaurants] = useState(null);
+  const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-
-  async function getRestaurants() {
-    const data = await fetch(SWIGGY_API);
-    const json = await data?.json();
-
-    let restaurantInfo =
-      json?.data?.cards?.length == 3
-        ? json?.data?.cards[2]
-        : json?.data?.cards[0];
-
-    setAllRestaurants(restaurantInfo?.data?.data?.cards);
-    setFilteredRestaurants(restaurantInfo?.data?.data?.cards);
-  }
 
   useEffect(() => {
     getRestaurants();
   }, []);
 
+  const getRestaurants = async () => {
+    const data = await fetch(SWIGGY_API);
+    const json = await data?.json();
+
+    let resData = await json?.data?.cards[2]?.card?.card?.gridElements
+      ?.infoWithStyle?.restaurants;
+
+    let restaurants = await resData.map((res) => res?.info);
+
+    // console.log(restaurants);
+
+    setAllRestaurants(restaurants);
+    setFilteredRestaurants(restaurants);
+  };
+
   const filterRestaurants = (searchInput, restaurants) => {
     const filterData = restaurants.filter((restaurant) =>
-      restaurant.data.name.toLowerCase().includes(searchInput.toLowerCase())
+      restaurant.name.toLowerCase().includes(searchInput.toLowerCase())
     );
 
     return filterData;
@@ -61,20 +63,14 @@ const Body = () => {
           Search
         </button>
       </div>
-      {!allRestaurants ? (
+      {allRestaurants.length === 0 ? (
         <ShimmerBody />
       ) : (
         <div className="flex flex-col flex-wrap justify-center items-center md:flex-row">
           {filteredRestaurants?.map((restaurant) => {
             return (
-              <Link
-                to={"/restaurant/" + restaurant?.data?.id}
-                key={restaurant?.data?.id}
-              >
-                <RestaurantCard
-                  {...restaurant?.data}
-                  key={restaurant?.data?.id}
-                />
+              <Link to={"/restaurant/" + restaurant?.id} key={restaurant?.id}>
+                <RestaurantCard {...restaurant} key={restaurant?.id} />
               </Link>
             );
           })}

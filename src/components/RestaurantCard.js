@@ -8,8 +8,8 @@ const RestaurantCard = ({
   name,
   cuisines,
   avgRating,
-  deliveryTime,
-  costForTwoString,
+  sla,
+  costForTwo,
   veg,
 }) => {
   return (
@@ -47,11 +47,11 @@ const RestaurantCard = ({
         )}
 
         <div className="text-xs px-2 py-1 font-medium text-gray-600">
-          {deliveryTime} MINS
+          {sla?.deliveryTime} MINS
         </div>
         <div></div>
         <div className="text-xs px-2 py-1 font-medium text-gray-600">
-          {costForTwoString}
+          {costForTwo}
         </div>
       </div>
     </div>
