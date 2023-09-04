@@ -18,12 +18,12 @@ const Body = () => {
     const data = await fetch(SWIGGY_API);
     const json = await data?.json();
 
-    let resData = await json?.data?.cards[2]?.card?.card?.gridElements
-      ?.infoWithStyle?.restaurants;
+    let resData = await json?.data?.cards;
 
-    let restaurants = await resData.map((res) => res?.info);
+    let restaurants = await resData[2]?.card?.card?.gridElements?.infoWithStyle
+      ?.restaurants;
 
-    // console.log(restaurants);
+    restaurants = await restaurants?.map((res) => res?.info);
 
     setAllRestaurants(restaurants);
     setFilteredRestaurants(restaurants);
@@ -51,7 +51,11 @@ const Body = () => {
           className="md:my-10 m-2 p-2 bg-gray-100 md:basis-96 rounded-md text-sm basis-56"
           placeholder="Search a restaurant"
           value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
+          onChange={(e) => {
+            setSearchInput(e.target.value);
+            const data = filterRestaurants(e.target.value, allRestaurants);
+            setFilteredRestaurants(data);
+          }}
         ></input>
         <button
           className="bg-green-500 text-white p-2 md:mx-5 mx-3 rounded-md text-sm"
